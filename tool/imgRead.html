@@ -11,7 +11,7 @@
     input{outline: 0;}
     p{margin:0px;}  
     .file{position:absolute; width:100%; font-size:90px;}  
-    .filebtn{display:block; position:relative; height:110px; color:#FFFFFF; background:#06980e; font-size:48px; line-height:110px; text-align:center; cursor:pointer; border: 3px solid #cccccc;}  
+    .filebtn{display:block; position:relative; height:110px; color:#FFFFFF; background:#06980e; font-size:48px; line-height:110px; text-align:center; cursor:pointer; border: 0;}  
     .filebtn:hover{background:#04bc0d;}  
   </style>  
   
@@ -19,14 +19,24 @@
     // 选择图片  
     var preview = document.querySelector('img');
 	var data = [];
-	var reader  = new FileReader();
 	var files;
 	/**
 	 * 
 	 * @param {Object} e 当前元素
 	 */
-	function uploadImg(e){  
+	function uploadImg(e){
+	  var reader  = new FileReader();
 	  files = e.files;
+	  if(files.length>5)return;
+	  console.log(files.length);
+	  for (var i = 0; i < files.length; i++) {
+	  	// 判断图片格式  
+        if(!checkype(files[i])){
+        		return;
+        }else{
+        		reader.readAsDataURL(files[i]);
+        }
+	  }
 	  reader.addEventListener("load", function () {
 	  	var ele = document.createElement("img");
 	  	ele.src = reader.result;
@@ -35,11 +45,6 @@
 	    document.getElementById("imgList").appendChild(ele);
 	    //TODO upload files
 	  }, false);
-	  for (var i = 0; i < files.length; i++) {
-	  	// 判断图片格式  
-        if(!checkype(files[i]))return;
-		reader.readAsDataURL(files[i]);
-	  }
 	  //	upfiles();
 	}
 	/**
@@ -62,8 +67,9 @@
 	 */
 	function upfiles(){
 		$.post("URL", { "imgList": data},function(res){  
-            if(res.resp===true){  
-                alert('upload success');  
+            if(res.resp===true){
+                alert('upload success');
+                data = [];
             }  
         },'json');
 	}
