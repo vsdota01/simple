@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>粘贴剪切板的文字或截图，不支持复制文件</title>
+	</head>
+	<body>
+		<div id="textarea" contenteditable="true" style="width: 500;height: 200px;overflow: auto;overflow-wrap: break-word;border:1px solid palevioletred;">
+		</div>
+		<script type="text/javascript">
+			document.getElementById("textarea").addEventListener("paste",function(e){
+				var item = e.clipboardData.items[0];
+				var type= item.kind;
+				console.log(type)
+				switch (type){
+					case "string": pasteText(item);break;
+					case "file": pasteFile(item);break;
+					default:break;
+				}
+			
+			  e.preventDefault();
+			  e.stopPropagation();
+			});
+			function pasteText(item){
+				item.getAsString(function (str) {
+	                // str 是获取到的字符串
+	                var span = document.createElement("span");
+	                span.innerText = str;
+	               document.getElementById("textarea").appendChild(span);
+	            })
+			}
+			/**
+			 * 
+			 * @param {Object} item
+			 * 限制只能粘贴图片
+			 */
+			function pasteFile(item){
+				var pasteFile = item.getAsFile();
+				if(pasteFile.name.indexOf("image")==0 && /\.(?:jpg|png)$/.test(pasteFile.name)){
+					pasteImg(item);
+				}
+			}
+			//粘贴截屏图片
+			function pasteImg(item){
+				var pasteFile = item.getAsFile();
+				var reader  = new FileReader();
+				reader.addEventListener("load", function () {
+				 	var ele = document.createElement("img");
+				  	ele.src = reader.result;
+				  	ele.width = 300;
+				    document.getElementById("textarea").appendChild(ele);
+				});
+				reader.readAsDataURL(pasteFile);
+			}
+		</script>
+	</body>
+</html>

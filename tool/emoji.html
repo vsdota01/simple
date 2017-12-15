@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表情demo</title>
+		<style type="text/css">
+		li{
+			list-style: none;
+		}
+		li img{
+			width: 40px;
+		}
+		</style>
+	</head>
+	<body>
+		<div style="width: 500px;height: 400px;border: 1px solid palevioletred;" id="talk"></div>
+		<div>
+		<button id="emojiBtn" onclick="showEmoji()">表情</button>
+		<ul id="emoji" style="display: none;">
+			<li><img src="//www.baidu.com/img/bd_logo1.png"/></li>
+		</ul>
+		</div>
+		<script type="text/javascript">
+		function showEmoji(){
+			document.getElementById("emoji").style.display = document.getElementById("emoji").style.display=="block"?"none":"block";
+		}
+		function insertalk(img){
+			document.getElementById("talk").appendChild(img);
+		}
+		document.getElementById("emoji").onclick = function(e){
+			var target = e.target || e.srcElement;
+			console.log(target.localName=="img")
+			if(target.localName == "img"){
+				var img = target.cloneNode(false);
+//					img.width = 50;
+				insertalk(img);
+				document.getElementById("emoji").style.display = "none";
+			}
+		}
+		</script>
+	</body>
+</html>
