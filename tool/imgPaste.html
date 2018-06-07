@@ -36,7 +36,7 @@
 			 */
 			function pasteFile(item){
 				var pasteFile = item.getAsFile();
-				if(pasteFile.name.indexOf("image")==0 && /\.(?:jpg|png)$/.test(pasteFile.name)){
+				if(pasteFile.name.indexOf("image")==0 && /\.(?:jpg|png)$/.test(pasteFile.name.toLowerCase())){
 					pasteImg(item);
 				}
 			}
