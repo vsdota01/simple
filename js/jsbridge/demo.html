@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="token">111</div>
+		<div><button onclick="getToken()">测试主动调用native</button></div>
+	<script type="text/javascript" src="web-native.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		function getToken(){
+			var data = {id:1,content:"我是测试数据"};
+			wk.submitFromWeb(data,function(resp){
+				console.log(JSON.stringify(resp))
+				document.getElementById("token").innerHTML=JSON.stringify(resp);
+			})
+		}
+		
+	</script>
+	</body>
+</html>

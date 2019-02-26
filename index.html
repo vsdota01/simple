@@ -5,6 +5,72 @@
 		<title></title>
 	</head>
 	<body>
-		welcome to my github!
+		<div id="token">
+			
+		</div>
+<script type="text/javascript" charset="utf-8">
+	var flag = false;
+	function setupWebViewJavascriptBridge(callback) {
+	    if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+	    if(navigator.userAgent.toLowerCase().match(/android/g) && !flag){
+	    	flag = true;
+	    	document.addEventListener('WebViewJavascriptBridgeReady', function() {
+				callback(WebViewJavascriptBridge)
+			}, false)
+	    	return;
+	    }
+	    if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+	    window.WVJBCallbacks = [callback];
+	    var WVJBIframe = document.createElement('iframe');
+	    WVJBIframe.style.display = 'none';
+	    WVJBIframe.src = 'wvjbscheme://__bridge_loaded__';
+	    document.documentElement.appendChild(WVJBIframe);
+	    setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0);
+	}
+	
+	setupWebViewJavascriptBridge(function(jsBridge){
+		jsBridge.registerHandler("loginIn",function(resp){
+			document.getElementById("token").innerHTML=JSON.stringify(resp);
+		})
+	})
+	
+	function callHandle(funName,data,jscallback){
+		setupWebViewJavascriptBridge(function(jsBridge){
+			jsBridge.callHandler(funName,data,function(resp){
+				jscallback.call(this,resp);
+			})
+		})
+	}
+	
+	function registerHandle(jsFunName,jscallback){
+		setupWebViewJavascriptBridge(function(jsBridge){
+			jsBridge.registerHandler(jsFunName,function(resp){
+				jscallback.call(this,resp);
+			})
+		})
+	}
+	
+	var wk = {
+		getToken:function(data,callback){
+			callHandle("key",{},function(resp){
+				callback.call(this,resp);
+			});
+		}
+	}
+	
+		</script>
+		<script type="text/javascript">
+			wk.getToken({},function(resp){
+				document.getElementById("token").innerHTML="111"
+			})
+			
+			console.log(navigator.onLine ? 'online' : 'offline');
+window.addEventListener('offline', networkStatus);
+window.addEventListener('online', networkStatus);
+
+function networkStatus(e) {
+  console.log(e.type);
+}
+		</script>
 	</body>
 </html>
