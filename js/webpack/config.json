@@ -1,0 +1,10 @@
+{
+  "jsbridge": "inner",
+  "wxjssdk": "true",
+  "secure": ["sign", "aliCaptcha"],
+  "fission": "base",
+  "share": {},
+  "track": "true",
+  "mock": {},
+  "sdk":["@aiways/jsbridge-promise","@aiways/jsbridge-promise","@aiways/jsbridge-public"]
+}
