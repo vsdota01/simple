@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title></title>
+		<style>
+			body{
+			    font-size: 63.5%;
+			    background-color: #eee;
+			}
+			.bannar{
+			  height: 42rem;
+			  background: #545762 url(http://img1.vued.vanthink.cn/vued45625dc2ae91388364f60ddaedf1af84.jpeg) no-repeat center bottom;
+			  background-size: cover;
+			}
+			.doc{
+			  max-width: 920px;
+			  margin: 2rem auto;
+			  margin-top: -120px;
+			  padding: 1rem 2rem;
+			  background-color: #fff;
+			  box-shadow: 0 5px 8px rgba(0,0,0,.2);
+			}
+			h1{
+			    padding: 20px;
+			    background-color: #fff;
+			    font-size: 3rem;
+			}
+			video{
+			    display: block;
+			    background-color: #000;
+			}
+			h2,h3{
+			  text-align:center;
+			}
+			h3{
+			    font-size: 1.4rem;
+			}
+			h5{
+			    padding: 1rem 2rem;
+			    background-color: #fff;
+			}
+			p{
+			    font-size: 1.8rem;
+			    padding: 20px;
+			}
+			.video-area{
+			    position: relative;
+			    width: 640px;
+			    height: 320px;
+			    margin: 0 auto;
+			    background-color: #000;
+			}
+			.video-area .log{
+			    opacity: 1;
+			    position: absolute;
+			    left: 0;
+			    right: 0;
+			    top: 0;
+			    bottom: 0;
+			    padding-left: 20px;
+			    padding-top: 20px;
+			    background-color: rgba(0,0,0, .5);
+			    display: flex;
+			    justify-content: center;
+			    align-items: center;
+			    flex-direction: column;
+			    transition: all .35s ease-in;
+			}
+			.video-area  video,
+			.video-area  canvas{
+			    width: 100%;
+			    height: 100%;
+			}
+			.video-area .log.active{
+			    opacity: .25;
+			    display: block;
+			}
+			.video-area .log.fadeout{
+			    opacity: 0.4;
+			}
+			.video-area .btn{
+			    height: 60px;
+			    width: 120px;
+			    border-radius: 10px;
+			
+			}
+			.video-area .log-item{
+			    color: #54ab3d;
+			}
+			.video-area .status{
+			    position: absolute;
+			    top: 20px;
+			    right: 20px;
+			    width: 160px;
+			    padding: 5px;
+			    background-color: #43921c;
+			    color: #fff;
+			    opacity: .95;
+			}
+			.video-area .status table{
+			    width: 100%;
+			    font-size: 12px;
+			}
+			.controls{
+			    padding: 40px;
+			}
+			@media all and (max-width:720px) {
+			    .doc{
+			        padding: 5px;
+			    }
+			    .video-area{
+			        max-width: 100%;
+			        height: 360px;
+			    }
+			}
+			
+			table{
+			    font-size: 1.4rem;
+			}
+			.footer {
+			    background: #333;
+			    text-align: center;
+			    color: #ddd;
+			    padding: 30px 40px;
+			}
+			.footer a {
+			    color: #fff;
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1>HEVC/H.265</h1>
+		<div class="video-area">
+			<canvas id="canvas" width="640" height="480"></canvas>
+			<div class="log js-log-hevc">
+					<button type="button" class="btn btn-default js-play">Play</button>
+			</div>
+	</div>
+	<div class='hevc-status'></div>
+	<h1>H.264</h1>
+	<div class="video-area">
+		<video preload="metadata" muted="" src="./mp4-640.mp4" class="js-video" controls></video>
+	</div>
+	<script src="http://s1.vued.vanthink.cn/d59f937c159f/jquery-2.2.1.min.js"></script>
+	<script type="text/javascript" src="./libde265.js"></script>
+	<script src="./video.js"></script>
+	<script type="text/javascript">
+	    (function (w) {
+	      var s = document.createElement('script');
+	      s.src = '//survey.survicate.com/workspaces/a1ce28d3f9c782f9bfe573a219b81d9a/web_surveys.js';
+	      s.async = true;
+	      var e = document.getElementsByTagName('script')[0];
+	      e.parentNode.insertBefore(s, e);
+	    })(window);
+	  </script>
+	</body>
+</html>

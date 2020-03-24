@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title></title>
+		<script src="./r4web.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			font-size: 14px;
+			line-height: 40px;
+			text-align: center;
+		}
+		.a1{
+			background: #04BC0D;
+		}
+		p{
+			background: red;
+		}
+		button{
+			background: crimson;
+		}
+	</style>
+	<body>
+		<div>
+			<div class="a1">我是div</div>
+			<img src="../svg/check-circle.svg" />
+		</div>
+		<p>我是p</p>
+		
+		<button onclick="end()" style="position: fixed;bottom: 20px;right: 20px;">关闭录屏</button>
+		<script>
+			var r4web = new R4web()
+			r4web.begin();
+			function end(){
+				r4web.end()
+			}
+		</script>
+	</body>
+</html>

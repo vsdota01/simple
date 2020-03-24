@@ -1,0 +1,36 @@
+{
+	"code": 200,
+	"message": "操作成功",
+	"data": {
+		"inviationTotalCount": 0,
+		"points": 0,
+		"appShare": {
+			"icon": "https://aiways-aichizhixingapp.oss-cn-shanghai.aliyuncs.com/prod/picture/icon-108.png",
+			"link": "https://app.ai-ways.com/#/invite?invitorName=lxq&invitorMobile=13636521773",
+			"title": "好友邀请您成为首批限量爱驰用户伙伴",
+			"content": "爱驰用户伙伴邀约他人申请成功，邀约人与被邀约人各享1000积分"
+		},
+		"invationList": [{
+			"id": 28643,
+			"headUrl": "https://aiways-aichizhixingapp.oss-cn-shanghai.aliyuncs.com/prod/avatar/956d8434-d2dc-4306-9d5a-ed5f9f6df7c9.jpg",
+			"nickname": "hellobessie",
+			"mobile": "15801812113",
+			"payFlag": "8",
+			"invitTime": 1567517046000
+		}, {
+			"id": 28644,
+			"headUrl": "https://aiways-aichizhixingapp.oss-cn-shanghai.aliyuncs.com/prod/avatar/956d8434-d2dc-4306-9d5a-ed5f9f6df7c9.jpg",
+			"nickname": "hellobessie",
+			"mobile": "15801812113",
+			"payFlag": "6",
+			"invitTime": 1567517046000
+		}, {
+			"id": 28868,
+			"headUrl": "https://aiways-aichizhixingapp.oss-cn-shanghai.aliyuncs.com/prod/avatar/956d8434-d2dc-4306-9d5a-ed5f9f6df7c9.jpg",
+			"nickname": "hellobessie",
+			"mobile": "15801812113",
+			"payFlag": "8",
+			"invitTime": 1567997041000
+		}]
+	}
+}
