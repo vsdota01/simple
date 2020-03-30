@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>可视化埋点</title>
+	</head>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			font-size: 14px;
+			line-height: 40px;
+    }
+    .flex{
+      display: flex;
+    }
+    .flex1{
+      flex: 1;
+    }
+    .flex-col{
+      flex-direction: column;
+    }
+	</style>
+	<body>
+    <!-- <div><input placeholder="请输入埋点页面地址" id="url"/>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="_load()">加载</button></div> -->
+    <div class="flex">
+      <iframe src="http://localhost:8080/tool/iframe.html" width="375" height="667" 
+        style="background: #fff;border: 1px solid #111;box-sizing: content-box;" id="iframetest"></iframe>
+      <div class="flex flex1 flex-col">
+        <div><input placeholder="请输入埋点事件名称" id='e_name'/></div>
+        <div><input placeholder="请输入埋点事件id" id='e_id'/></div>
+        <div><button onclick="_clear()">清除</button>
+          <button onclick="save()">保存</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // 保存完还原，dom节点，节点style
+      var query = ''
+      var _style = ''
+      var testiframe=document.getElementById("iframetest").contentWindow;
+      var doc=testiframe.document;
+      testiframe.addEventListener("click",function(e){
+        console.log(e.path)
+        _style =  e.srcElement.getAttribute('style')||''
+        e.srcElement.setAttribute("style",_style+'border:1px solid red;')
+        var _path = e.path.splice(0,e.path.length-2)
+        var _pathName = []
+        for(var i=0;i<_path.length;i++){
+          var _classList = ''
+          for(var j=0;j<_path[i].classList.length;j++){
+            _classList=_classList+'.'+_path[i].classList[j]
+          }
+          _pathName.push(_path[i].localName+_classList)
+        }
+        _pathName = _pathName.reverse()
+        query = _pathName.join(' ')
+      },true)
+
+      // 事件保存
+      var _events = []
+
+
+      function save(){
+        if(!query){
+          alert('请选择需要埋点的位子')
+          return
+        }
+        var e_id = document.querySelector('#e_id').value
+        var e_name = document.querySelector('#e_name').value
+        _events.push({e_id:e_id,e_name:e_name,query:query})
+        query = ''
+        alert('已保存')
+      }
+
+      function _load(){
+        var url = document.querySelector('#url').value
+        if(!url){
+          alert('请输入埋点页面地址')
+          return
+        }
+        console.log(url)
+        document.getElementById("iframetest").src = url
+      }
+
+      function _clear(){
+        document.querySelector('#e_id').value = '';
+        document.querySelector('#e_name').value = '';
+        query = ''
+      }
+    </script>
+  </body>
+</html>
