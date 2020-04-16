@@ -36,9 +36,14 @@
       </div>
     </div>
     <script>
-      // 保存完还原，dom节点，节点style
       var query = ''
       var _style = ''
+      
+      /**
+      * 1.可视化埋点页面通过iframe加载同源网页，存储埋点信息，数据上报
+      * 2.需埋点的网页加载sdk,通过事件捕获addEventListener('event',cb,true)获取事件dom
+      * 3.比对埋点库包含dom节点，数据上报
+      */
       var testiframe=document.getElementById("iframetest").contentWindow;
       var doc=testiframe.document;
       testiframe.addEventListener("click",function(e){
@@ -60,8 +65,7 @@
 
       // 事件保存
       var _events = []
-
-
+      // 事件暂存还原dom样式
       function save(){
         if(!query){
           alert('请选择需要埋点的位子')
@@ -74,20 +78,11 @@
         alert('已保存')
       }
 
-      function _load(){
-        var url = document.querySelector('#url').value
-        if(!url){
-          alert('请输入埋点页面地址')
-          return
-        }
-        console.log(url)
-        document.getElementById("iframetest").src = url
-      }
-
       function _clear(){
         document.querySelector('#e_id').value = '';
         document.querySelector('#e_name').value = '';
         query = ''
+        _events = []
       }
     </script>
   </body>
